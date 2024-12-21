@@ -1,1 +1,54 @@
-hello
+<head>
+<title>Benchmark results</title>
+</head>
+<body style='width: 600px'>
+<div class="preview__inner-2" style="padding: 10px 25px 216px;"><div class="cl-preview-section"><h1 id="graph-traversal-llm-benchmark-insights-21-december-2024">Graph Traversal LLM Benchmark Insights, 21 December 2024</h1>
+</div><div class="cl-preview-section"><p>See the paper-like document <a href='llm-graph-benchmark.pdf'>here</a>: </p>
+</div><div class="cl-preview-section"><p>NB: all comparisons “performs better/worse” are relevant only for scope/task of this benchmark.</p>
+</div><div class="cl-preview-section"><p>NB: the complexity of tasks, turned out, was not always correlated with task edge count in some areas (e.g. around X=44, X=79), however on full scale,  the correlation is obvious, and is basis of conclusions.</p>
+</div><div class="cl-preview-section"><h3 id="all-together-chart">All-together chart</h3>
+</div><div class="cl-preview-section"><p>Insights:</p>
+</div><div class="cl-preview-section"><ul>
+<li>of all tested free/open weights small models (sizes up to 14B), LLama-3.1-8B was performing best.</li>
+<li>IBM Granite models were performing worst, regardless of size.</li>
+</ul>
+</div><div class="cl-preview-section"><p>Click <a href="graph-traversal/model_performance.html">here to see</a> all results in one chart</p>
+</div><div class="cl-preview-section"><h3 id="google-models.">Google models.</h3>
+</div><div class="cl-preview-section"><p>Google models were evaluated:</p>
+</div><div class="cl-preview-section"><ul>
+<li>gemini-1.5-flash-8b - has run 3 times
+<ul>
+<li>Free version, which stopped by termination around complexity 52. Then paid version continued because of confusion, and reached 79-100.</li>
+<li>Paid version (pass 2) reached very far</li>
+<li>Paid version same account pass 3, reached like 1st attempt.</li>
+</ul>
+</li>
+<li>gemini-2.0-flash-exp</li>
+</ul>
+</div><div class="cl-preview-section"><p>Conclusions: until to certain point, 3 passes behave within margin of statistical error, but for unknown reasons sometimes just stop working on higher complexities. It is not statistical error. Maybe deployment differences. Maybe time of the day.</p>
+</div><div class="cl-preview-section"><p>Google 1.5 flash (non 8B) was NOT measured, but google 2.0 flash is very cool in this benchmark. It is compared to the top tier models in different comparison.</p>
+</div><div class="cl-preview-section"><p>It can be seen that for weaker complexities, google flash 2.0 outperforms gpt-4o-mini and haiku 3.5 with large margin, and on big complexities outperforms gpt-4o.</p>
+</div><div class="cl-preview-section"><p>In general, Google Flash 8B model is very interesting. It is very deeply thinking, compared to its size. Also it’s very cheap. Wonder why no other model is like this.</p>
+</div><div class="cl-preview-section"><p>Click <a href="graph-traversal/google-flash.html">here to see</a> google models on one chart.</p>
+</div><div class="cl-preview-section"><h3 id="qwen-models.">Qwen models.</h3>
+</div><div class="cl-preview-section"><p>We conclude: for this task they all are similarly weak. Interestingly, Coder-14B model performed better than Coder-32B model.  Coder-14B is K5_M model ran on local Nvidia card, while Coder-32B was run via sambanova.</p>
+</div><div class="cl-preview-section"><p>Click <a href="graph-traversal/qwen.html">here to see</a> qwen models on one chart.</p>
+</div><div class="cl-preview-section"><h3 id="mistral-models.">Mistral models.</h3>
+</div><div class="cl-preview-section"><p>We conclude: all their models are probably built with very same architecture and constant depth. They are very close, except mistral-large, which gained more depth due to size.</p>
+</div><div class="cl-preview-section"><p>Interestingly, ministral-3b perform best of all non-large models.</p>
+</div><div class="cl-preview-section"><p>Click <a href="graph-traversal/mistral.html">here to see</a> them on one chart.</p>
+</div><div class="cl-preview-section"><h3 id="all-top-tier-models-including-thinking-models.">All Top-Tier models, including thinking models.</h3>
+</div><div class="cl-preview-section"><p>Remarks:</p>
+</div><div class="cl-preview-section"><ul>
+<li>o1-mini is not included.  o1-mini and above models are of completely different league achieving <em><strong>close to 100% at complexity 200</strong></em>, and it was not benchmarked at this complexity scale. We admit OpenAI has big lead in this area.</li>
+<li><em><strong>all models often make errors on very simple tasks</strong></em>. You can see by task complexity 016 and higher, no model on this chart produced 100% correct results. There are around 30-40 simpler tests per simple complexity level.</li>
+<li>Qwen QwQ stopped producing results around complexity 72 (determined by random sampling), and was not included in the chat. We cannot tell if it achieves 100% in the simpler tests. We ran out of free glhf quota to benchmark it fully.</li>
+<li>Sonnet 3.5 is best of class of non-reasoning models.</li>
+<li>Google Learn-Exp is below Sonnet 3.5 in this task.</li>
+<li>Google Flash2 is close to Sonnet on more complex tasks, but is not as performant in simple tasks.</li>
+<li>4o-mini outpaces Haiku only on higher levels.</li>
+<li>Maybe, 4o outpaces Sonnet beyond the edge of tested complexities range.</li>
+</ul>
+</div><div class="cl-preview-section"><p>Click <a href="graph-traversal/toptier.html">here to see</a> them on one chart.</p>
+</div></div>
+</body>
